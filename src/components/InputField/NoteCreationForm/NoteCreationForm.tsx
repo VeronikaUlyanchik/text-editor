@@ -1,4 +1,4 @@
-import React, {KeyboardEvent, useState} from 'react';
+import React, {KeyboardEvent} from 'react';
 import {Button} from "../../Button/Button";
 import {Input} from "../../Input/Input";
 import css from "./NoteCreationForm.module.scss"

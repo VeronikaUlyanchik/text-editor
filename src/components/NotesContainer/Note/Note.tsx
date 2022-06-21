@@ -1,4 +1,4 @@
-import React, {memo, useEffect, useState} from 'react';
+import React, {memo, useState} from 'react';
 import css from './Note.module.scss'
 import {useAppDispatch, useAppSelector} from "../../../bll/store";
 import {Button} from "../../Button/Button";
