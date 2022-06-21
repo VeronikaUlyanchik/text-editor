@@ -1,6 +1,6 @@
 import {createSlice, current, PayloadAction} from "@reduxjs/toolkit";
 import {v1} from "uuid";
-import Data from "../../data/data.json"
+import Data from "../../data/data.json";
 
 export type NoteType = {
     id: string
@@ -21,7 +21,7 @@ export type StateType = {
 }
 
 const initialState: StateType = {
-    notes:Data.notes,
+    notes: Data.notes,
     tags: Data.tags,
     selectTag: '',
 };
@@ -46,7 +46,7 @@ const notesSlice = createSlice({
             });
             found.tags.forEach(i => {
                 if (allTags.filter(t => t === i.tag).length > 1) {
-                    return
+                    state.tags = state.tags
                 } else {
                     state.tags = state.tags.filter(f => f.tag !== i.tag);
                 }
@@ -55,12 +55,12 @@ const notesSlice = createSlice({
         },
         editNote(state, action: PayloadAction<{ id: string, title: string, text: string, tags: { id: string, tag: string }[] }>) {
             const found = current(state.notes.filter(i => i.id === action.payload.id)[0]);
-            let tags: TagsType[];
+            let tags: TagsType[] = found.tags;
             action.payload.tags.forEach((i, index) => {
                 if (found.tags.find(t => t.tag === i.tag)) {
-                    tags = found.tags
+                    tags = found.tags || []
                 } else {
-                    tags = action.payload.tags
+                    tags = action.payload.tags || []
                 }
             })
             state.notes = state.notes.map(i => i.id === action.payload.id ? ({...i, ...action.payload, tags}) : i);

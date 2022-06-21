@@ -15,7 +15,7 @@ type NoteType = {
 
 export const Note = memo(({text, id, title}: NoteType) => {
     const notes = useAppSelector(state => state.notes.notes);
-    const tags = notes.filter(i=> i.id === id)[0].tags;
+    const tags = notes.filter(i => i.id === id)[0].tags;
     const dispatch = useAppDispatch();
     const [openNote, setOpenMode] = useState<boolean>(false);
     const [editMode, setEditMode] = useState<boolean>(false);
@@ -24,15 +24,22 @@ export const Note = memo(({text, id, title}: NoteType) => {
 
     const editNotes = () => {
         if (text && title) {
-            const tags =  Array.from(new Set(newText.match(/#[a-zA-Z0-9А-Яа-я]+/g)))?.map(i => ({id: v1(), tag: i})) || []
-            dispatch(editNote({id, title: newTitle, text: newText, tags}))
-            tags.forEach(i=> dispatch(addTag(i)))
-            setEditMode(false)
+            const tags = Array.from(new Set(newText.match(/#[a-zA-Z0-9А-Яа-я]+/g)))?.map(i => ({
+                id: v1(),
+                tag: i
+            })) || []
+            dispatch(editNote({id, title: newTitle, text: newText, tags}));
+            tags.forEach(i => dispatch(addTag(i)));
+            setEditMode(false);
         }
     }
-        const tagsArray = tags.map(i=> i.tag.slice(1,i.tag.length));
-        const tagsArrayWithHash = tags.map(i=> i.tag);
-        const textForRender = text.split(' ').map(i=> tagsArray.includes(i) || tagsArrayWithHash.includes(i) ? <span style={{color: 'red', margin:2}}>{i}</span> : <span style={{margin:2}}>{i}</span>)
+    let textForRender = text.split(' ').map(i => <span style={{margin: 2}}>{i}</span>);
+    if (tags) {
+        const tagsArray = tags.map(i => i.tag.slice(1, i.tag.length));
+        const tagsArrayWithHash = tags.map(i => i.tag);
+        textForRender = text.split(' ').map(i => tagsArray.includes(i) || tagsArrayWithHash.includes(i) ?
+            <span style={{color: 'red', margin: 2}}>{i}</span> : <span style={{margin: 2}}>{i}</span>)
+    }
 
     return (
         <div className={css.note}>
@@ -45,7 +52,7 @@ export const Note = memo(({text, id, title}: NoteType) => {
                     <Button name={'Edit'} callback={() => setEditMode(true)}/>
                     {openNote && <div className={css.text}>{textForRender}</div>}</>
             }
-            <div> {tags.map(i=> <span key={i.id}>{i.tag} </span>)}</div>
+            <div> { tags && tags.map(i => <span key={i.id}>{i.tag} </span>)}</div>
             <AddTagContainer id={id}/>
         </div>
     )

@@ -5,7 +5,7 @@ import css from "./NotesContainer.module.scss"
 
 
 export const NotesContainer = () => {
-    let notes = useAppSelector(state => state.notes.notes)
+    let notes = useAppSelector(state => state.notes.notes);
     const selectedTag = useAppSelector(state=> state.notes.selectTag);
 
     if (selectedTag) {
