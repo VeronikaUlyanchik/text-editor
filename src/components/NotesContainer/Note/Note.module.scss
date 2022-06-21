@@ -1,0 +1,28 @@
+.note {
+  z-index: 1;
+  color:#000;
+  background:#ffc;
+  height: auto;
+  min-height: 20px;
+  width:250px;
+  padding:1em;
+  display: table;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin: 10px;
+  &:nth-child(even){
+    background-color: aquamarine;
+  }
+  .title{
+    cursor: pointer;
+    font-size: 18px;
+    color: #a6293a;
+    font-weight: bold;
+  }
+  .text {
+    width: 250px;
+    height: auto;
+    min-height: 100px;
+    overflow-wrap: break-word;
+  }
+}

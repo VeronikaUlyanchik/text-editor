@@ -1,0 +1,19 @@
+.button {
+  align-items: center;
+  background-color: transparent;
+  border-radius: 100px;
+  width: 100px;
+  border: 2px solid rgb(30, 30, 30);
+  font-weight: bold;
+  cursor: pointer;
+  height: 28px;
+  margin: 7px;
+  overflow: hidden;
+  padding: 0px;
+  position: relative;
+  text-transform: lowercase;
+  outline: none;
+}
+.button:hover{
+  border: 2px solid rgb(0, 255, 255);
+}

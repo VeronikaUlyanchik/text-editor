@@ -1,0 +1,16 @@
+{ "notes" : [
+{
+  "id": "1",
+  "text": "My first note #tag",
+  "title": "My",
+  "tags": [
+  {"id": "1",
+  "tag": "#tag"}]
+}],
+"tags": [
+{
+"id": "1",
+"tag": "#tag"
+}
+]
+}
