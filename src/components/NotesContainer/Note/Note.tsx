@@ -2,7 +2,7 @@ import React, {memo, useState} from 'react';
 import css from './Note.module.scss'
 import {useAppDispatch, useAppSelector} from "../../../bll/store";
 import {Button} from "../../Button/Button";
-import {addTag, deleteNote, editNote} from "../../../bll/reducers/notesReducer";
+import {addTag, deleteNote, deleteTag, editNote} from "../../../bll/reducers/notesReducer";
 import {NoteCreationForm} from "../../InputField/NoteCreationForm/NoteCreationForm";
 import {v1} from "uuid";
 import {AddTagContainer} from "../AddTagContainer/AddTagContainer";
@@ -52,7 +52,7 @@ export const Note = memo(({text, id, title}: NoteType) => {
                     <Button name={'Edit'} callback={() => setEditMode(true)}/>
                     {openNote && <div className={css.text}>{textForRender}</div>}</>
             }
-            <div> { tags && tags.map(i => <span key={i.id}>{i.tag} </span>)}</div>
+            <div> { tags && tags.map(i => <><span key={i.id}>{i.tag} </span> <span className={css.delete} onClick={()=>dispatch(deleteTag({id, tag: i.tag}))}> x </span></>)}</div>
             <AddTagContainer id={id}/>
         </div>
     )

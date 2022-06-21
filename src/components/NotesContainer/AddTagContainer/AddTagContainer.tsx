@@ -16,11 +16,9 @@ export const AddTagContainer = ({id}:AddTagContainerType )=> {
     const addTagHandler = () => {
         if(tag) {
             let trimTag = tag.trim();
-
             if (!trimTag.includes('#')) {
                 trimTag = `#${trimTag}`
             }
-
             const newTag = {
                 id: v1(), tag: trimTag
             }

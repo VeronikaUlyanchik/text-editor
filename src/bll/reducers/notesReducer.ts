@@ -46,7 +46,7 @@ const notesSlice = createSlice({
             });
             found.tags.forEach(i => {
                 if (allTags.filter(t => t === i.tag).length > 1) {
-                    state.tags = state.tags
+                    return
                 } else {
                     state.tags = state.tags.filter(f => f.tag !== i.tag);
                 }
@@ -78,10 +78,15 @@ const notesSlice = createSlice({
         },
         selectTag(state, action: PayloadAction<string>) {
             state.selectTag = action.payload
+        },
+        deleteTag(state, action: PayloadAction<{id:string, tag:string}>){
+            state.tags = state.tags.filter(i=> i.tag !== action.payload.tag);
+            state.notes = state.notes.map(i => i.id === action.payload.id ? ({...i, tags: i.tags.filter(i=> i.tag !== action.payload.tag)}) : i);
+
         }
     }
 });
 
-export const {addNote, deleteNote, editNote, addTag, selectTag, addTagToNote} = notesSlice.actions;
+export const {addNote, deleteNote, editNote, addTag, selectTag, addTagToNote, deleteTag} = notesSlice.actions;
 
 export const notesReducer = notesSlice.reducer;
